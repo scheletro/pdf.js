@@ -202,8 +202,12 @@ class Toolbar {
       items.pageNumber.value = pageNumber;
     }
 
-    items.previous.disabled = pageNumber <= 1;
-    items.next.disabled = pageNumber >= pagesCount;
+    if (items.previous) {
+      items.previous.disabled = pageNumber <= 1;
+    }
+    if (items.next) {
+      items.next.disabled = pageNumber >= pagesCount;
+    }
 
     items.zoomOut.disabled = pageScale <= MIN_SCALE;
     items.zoomIn.disabled = pageScale >= MAX_SCALE;
