@@ -234,6 +234,10 @@ html[dir="rtl"] #sidebarContainer {
   right: calc(0px - var(--sidebar-width));
 }
 
+#sidebarContainer {
+  top: 50px;
+}
+
 #outerContainer.sidebarResizing #sidebarContainer {
   /* Improve responsiveness and avoid visual glitches when the sidebar is resized. */
   transition-duration: 0s;
@@ -292,6 +296,10 @@ html[dir="rtl"] #sidebarContent {
 #viewerContainer:not(.pdfPresentationMode) {
   transition-duration: var(--sidebar-transition-duration);
   transition-timing-function: var(--sidebar-transition-timing-function);
+}
+
+#viewerContainer {
+  top: 50px;
 }
 
 #outerContainer.sidebarResizing #viewerContainer {
