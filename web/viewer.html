@@ -17,20 +17,9 @@
   <link rel="resource" type="application/l10n" href="locale/locale.properties">
   <!--#endif-->
 
-  <!--#if !PRODUCTION-->
-  <script defer src="../node_modules/es-module-shims/dist/es-module-shims.js"></script>
-  <script type="importmap-shim">
-      {
-        "imports": {
-          "pdfjs/": "../src/",
-          "pdfjs-lib": "../src/pdf.js",
-          "pdfjs-web/": "./"
-        }
-      }
-    </script>
-
-  <script src="viewer.js" type="module-shim"></script>
-  <!--#endif-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <link rel="stylesheet" href="./modules/markdown/index.style.css">
 </head>
 
 <body tabindex="1">
@@ -353,6 +342,28 @@
     </div>
   </div>
   <div id="printContainer"></div>
+
+  <!--#if !PRODUCTION-->
+  <div id="markdown-container">
+    <textarea id="markdown"></textarea>
+  </div>
+  <script src="./modules/markdown/index.js"></script>
+  <!--#endif-->
+
+  <!--#if !PRODUCTION-->
+  <script defer src="../node_modules/es-module-shims/dist/es-module-shims.js"></script>
+  <script type="importmap-shim">
+      {
+        "imports": {
+          "pdfjs/": "../src/",
+          "pdfjs-lib": "../src/pdf.js",
+          "pdfjs-web/": "./"
+        }
+      }
+    </script>
+
+  <script src="viewer.js" type="module-shim"></script>
+  <!--#endif-->
 </body>
 
 </html>
