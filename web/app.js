@@ -1279,6 +1279,8 @@ const PDFViewerApplication = {
       baseDocumentUrl = location.href.split("#")[0];
     }
     this.pdfLinkService.setDocument(pdfDocument, baseDocumentUrl);
+    // TODO: 通过 this.url 查询文件名称
+    // console.warn('pdfDocument', pdfDocument, this.url);
     // this.pdfDocumentProperties.setDocument(pdfDocument, this.url);
 
     const pdfViewer = this.pdfViewer;
