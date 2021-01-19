@@ -60,7 +60,7 @@ import { PDFRenderingQueue, RenderingStates } from "./pdf_rendering_queue.js";
 import { OverlayManager } from "./overlay_manager.js";
 import { PasswordPrompt } from "./password_prompt.js";
 import { PDFAttachmentViewer } from "./pdf_attachment_viewer.js";
-import { PDFDocumentProperties } from "./pdf_document_properties.js";
+// import { PDFDocumentProperties } from "./pdf_document_properties.js";
 import { PDFFindBar } from "./pdf_find_bar.js";
 import { PDFFindController } from "./pdf_find_controller.js";
 import { PDFHistory } from "./pdf_history.js";
@@ -208,7 +208,7 @@ const PDFViewerApplication = {
   /** @type {PDFPresentationMode} */
   pdfPresentationMode: null,
   /** @type {PDFDocumentProperties} */
-  pdfDocumentProperties: null,
+  // pdfDocumentProperties: null,
   /** @type {PDFLinkService} */
   pdfLinkService: null,
   /** @type {PDFHistory} */
@@ -525,12 +525,12 @@ const PDFViewerApplication = {
       this.findBar = new PDFFindBar(appConfig.findBar, eventBus, this.l10n);
     }
 
-    this.pdfDocumentProperties = new PDFDocumentProperties(
-      appConfig.documentProperties,
-      this.overlayManager,
-      eventBus,
-      this.l10n
-    );
+    // this.pdfDocumentProperties = new PDFDocumentProperties(
+    //   appConfig.documentProperties,
+    //   this.overlayManager,
+    //   eventBus,
+    //   this.l10n
+    // );
 
     this.pdfCursorTools = new PDFCursorTools({
       container,
@@ -832,7 +832,7 @@ const PDFViewerApplication = {
       this.pdfThumbnailViewer.setDocument(null);
       this.pdfViewer.setDocument(null);
       this.pdfLinkService.setDocument(null);
-      this.pdfDocumentProperties.setDocument(null);
+      // this.pdfDocumentProperties.setDocument(null);
     }
     webViewerResetPermissions();
     this.store = null;
@@ -1250,9 +1250,9 @@ const PDFViewerApplication = {
       this.downloadComplete = true;
       this.loadingBar.hide();
 
-      firstPagePromise.then(() => {
-        this.eventBus.dispatch("documentloaded", { source: this });
-      });
+      // firstPagePromise.then(() => {
+      //   this.eventBus.dispatch("documentloaded", { source: this });
+      // });
     });
 
     // Since the `setInitialView` call below depends on this being resolved,
@@ -1279,7 +1279,7 @@ const PDFViewerApplication = {
       baseDocumentUrl = location.href.split("#")[0];
     }
     this.pdfLinkService.setDocument(pdfDocument, baseDocumentUrl);
-    this.pdfDocumentProperties.setDocument(pdfDocument, this.url);
+    // this.pdfDocumentProperties.setDocument(pdfDocument, this.url);
 
     const pdfViewer = this.pdfViewer;
     pdfViewer.setDocument(pdfDocument);
@@ -2171,7 +2171,7 @@ const PDFViewerApplication = {
     eventBus._on("scrollmodechanged", webViewerScrollModeChanged);
     eventBus._on("switchspreadmode", webViewerSwitchSpreadMode);
     eventBus._on("spreadmodechanged", webViewerSpreadModeChanged);
-    eventBus._on("documentproperties", webViewerDocumentProperties);
+    // eventBus._on("documentproperties", webViewerDocumentProperties);
     eventBus._on("find", webViewerFind);
     eventBus._on("findfromurlhash", webViewerFindFromUrlHash);
     eventBus._on("updatefindmatchescount", webViewerUpdateFindMatchesCount);
@@ -2704,8 +2704,13 @@ function webViewerUpdateViewarea(evt) {
   const href = PDFViewerApplication.pdfLinkService.getAnchorUrl(
     location.pdfOpenParams
   );
-  PDFViewerApplication.appConfig.toolbar.viewBookmark.href = href;
-  PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton.href = href;
+  if (PDFViewerApplication.appConfig.toolbar.viewBookmark) {
+    PDFViewerApplication.appConfig.toolbar.viewBookmark.href = href;
+  }
+
+  if (PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton) {
+    PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton.href = href;
+  }
 
   // Show/hide the loading indicator in the page number input element.
   const currentPage = PDFViewerApplication.pdfViewer.getPageView(
@@ -2791,12 +2796,12 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
 
     // URL does not reflect proper document location - hiding some icons.
     const appConfig = PDFViewerApplication.appConfig;
-    appConfig.toolbar.viewBookmark.setAttribute("hidden", "true");
+    // appConfig.toolbar.viewBookmark.setAttribute("hidden", "true");
     appConfig.secondaryToolbar.viewBookmarkButton.setAttribute(
       "hidden",
       "true"
     );
-    appConfig.toolbar.download.setAttribute("hidden", "true");
+    // appConfig.toolbar.download.setAttribute("hidden", "true");
     appConfig.secondaryToolbar.downloadButton.setAttribute("hidden", "true");
   };
 
@@ -2881,9 +2886,9 @@ function webViewerSwitchScrollMode(evt) {
 function webViewerSwitchSpreadMode(evt) {
   PDFViewerApplication.pdfViewer.spreadMode = evt.mode;
 }
-function webViewerDocumentProperties() {
-  PDFViewerApplication.pdfDocumentProperties.open();
-}
+// function webViewerDocumentProperties() {
+//   PDFViewerApplication.pdfDocumentProperties.open();
+// }
 
 function webViewerFind(evt) {
   PDFViewerApplication.findController.executeCommand("find" + evt.type, {
