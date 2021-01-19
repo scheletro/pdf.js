@@ -832,7 +832,7 @@ const PDFViewerApplication = {
       this.pdfThumbnailViewer.setDocument(null);
       this.pdfViewer.setDocument(null);
       this.pdfLinkService.setDocument(null);
-      this.pdfDocumentProperties.setDocument(null);
+      // this.pdfDocumentProperties.setDocument(null);
     }
     webViewerResetPermissions();
     this.store = null;
@@ -2171,7 +2171,7 @@ const PDFViewerApplication = {
     eventBus._on("scrollmodechanged", webViewerScrollModeChanged);
     eventBus._on("switchspreadmode", webViewerSwitchSpreadMode);
     eventBus._on("spreadmodechanged", webViewerSpreadModeChanged);
-    eventBus._on("documentproperties", webViewerDocumentProperties);
+    // eventBus._on("documentproperties", webViewerDocumentProperties);
     eventBus._on("find", webViewerFind);
     eventBus._on("findfromurlhash", webViewerFindFromUrlHash);
     eventBus._on("updatefindmatchescount", webViewerUpdateFindMatchesCount);
@@ -2796,12 +2796,12 @@ if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
 
     // URL does not reflect proper document location - hiding some icons.
     const appConfig = PDFViewerApplication.appConfig;
-    appConfig.toolbar.viewBookmark.setAttribute("hidden", "true");
+    // appConfig.toolbar.viewBookmark.setAttribute("hidden", "true");
     appConfig.secondaryToolbar.viewBookmarkButton.setAttribute(
       "hidden",
       "true"
     );
-    appConfig.toolbar.download.setAttribute("hidden", "true");
+    // appConfig.toolbar.download.setAttribute("hidden", "true");
     appConfig.secondaryToolbar.downloadButton.setAttribute("hidden", "true");
   };
 
