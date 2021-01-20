@@ -1,0 +1,28 @@
+#markdown-container {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 50%;
+  height: 100%;
+}
+
+#markdown-container .CodeMirror {
+  flex: 1;
+
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+#markdown-container .editor-toolbar {
+  border-top: 0px;
+  border-left: 1px solid #bbb;
+  border-right: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+#markdown-container .editor-toolbar.fullscreen {
+  z-index: 10000;
+}

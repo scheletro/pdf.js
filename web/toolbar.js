@@ -130,7 +130,7 @@ class Toolbar {
 
     // The buttons within the toolbar.
     for (const { element, eventName } of this.buttons) {
-      element.addEventListener("click", evt => {
+      element && element.addEventListener("click", evt => {
         if (eventName !== null) {
           this.eventBus.dispatch(eventName, { source: this });
         }
@@ -202,8 +202,12 @@ class Toolbar {
       items.pageNumber.value = pageNumber;
     }
 
-    items.previous.disabled = pageNumber <= 1;
-    items.next.disabled = pageNumber >= pagesCount;
+    if (items.previous) {
+      items.previous.disabled = pageNumber <= 1;
+    }
+    if (items.next) {
+      items.next.disabled = pageNumber >= pagesCount;
+    }
 
     items.zoomOut.disabled = pageScale <= MIN_SCALE;
     items.zoomIn.disabled = pageScale >= MAX_SCALE;
